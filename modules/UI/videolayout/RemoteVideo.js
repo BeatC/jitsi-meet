@@ -433,7 +433,7 @@ RemoteVideo.prototype.removeRemoteVideoMenu = function() {
 RemoteVideo.createContainer = function (spanId) {
     var container = document.createElement('span');
     container.id = spanId;
-    container.className = 'videocontainer';
+    container.className = 'videocontainer videocontainer_small';
     var remotes = document.getElementById('remoteVideos');
     return remotes.appendChild(container);
 };

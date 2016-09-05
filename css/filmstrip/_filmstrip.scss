@@ -1,0 +1,30 @@
+.filmstrip {
+    &__videos {
+        @include flex();
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+
+        position:absolute;
+        text-align:right;
+        height:196px;
+        padding: 18px;
+        bottom: 0;
+        left: 0;
+        right: 20px;
+        width:auto;
+        border:1px solid transparent;
+        z-index: 5;
+        transition: bottom 2s;
+        overflow: visible !important;
+        font-size: 0pt; /*!!!Removes the gap between the local video container and the remote videos.*/
+
+        &.hidden {
+            bottom: -196px;
+        }
+    }
+
+    &__video {
+
+    }
+}

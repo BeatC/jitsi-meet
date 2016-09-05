@@ -213,7 +213,8 @@ SmallVideo.prototype.hideIndicator = function () {
  * @param {string} isMuted
  */
 SmallVideo.prototype.showAudioIndicator = function(isMuted) {
-    var audioMutedSpan = $('#' + this.videoSpanId + '>span.audioMuted');
+    var audioMutedClassName = 'videocontainer__audio-muted';
+    var audioMutedSpan = $(`#${this.videoSpanId}>.${audioMutedClassName}`);
 
     if (!isMuted) {
         if (audioMutedSpan.length > 0) {
@@ -224,7 +225,7 @@ SmallVideo.prototype.showAudioIndicator = function(isMuted) {
     else {
         if (!audioMutedSpan.length) {
             audioMutedSpan = document.createElement('span');
-            audioMutedSpan.className = 'audioMuted';
+            audioMutedSpan.className = audioMutedClassName;
             UIUtil.setTooltip(audioMutedSpan,
                 "videothumbnail.mute",
                 "top");
@@ -246,10 +247,11 @@ SmallVideo.prototype.showAudioIndicator = function(isMuted) {
  * if video muted.
  */
 SmallVideo.prototype.setMutedView = function(isMuted) {
+    var videoMutedClassName = 'videocontainer__video-muted';
     this.isVideoMuted = isMuted;
     this.updateView();
 
-    var videoMutedSpan = $('#' + this.videoSpanId + '>span.videoMuted');
+    var videoMutedSpan = $(`#${this.videoSpanId}>.${videoMutedClassName}`);
 
     if (isMuted === false) {
         if (videoMutedSpan.length > 0) {
@@ -259,7 +261,7 @@ SmallVideo.prototype.setMutedView = function(isMuted) {
     else {
         if (!videoMutedSpan.length) {
             videoMutedSpan = document.createElement('span');
-            videoMutedSpan.className = 'videoMuted';
+            videoMutedSpan.className = videoMutedClassName;
 
             this.container.appendChild(videoMutedSpan);
 
@@ -278,9 +280,9 @@ SmallVideo.prototype.setMutedView = function(isMuted) {
 };
 
 SmallVideo.prototype.updateIconPositions = function () {
-    var audioMutedSpan = $('#' + this.videoSpanId + '>span.audioMuted');
+    var audioMutedSpan = $('#' + this.videoSpanId + '>.videocontainer__audio-muted');
     var connectionIndicator = $('#' + this.videoSpanId + '>div.connectionindicator');
-    var videoMutedSpan = $('#' + this.videoSpanId + '>span.videoMuted');
+    var videoMutedSpan = $('#' + this.videoSpanId + '>.videocontainer__video-muted');
     if(connectionIndicator.length > 0 &&
         connectionIndicator[0].style.display != "none") {
         audioMutedSpan.css({right: "23px"});
@@ -348,7 +350,7 @@ SmallVideo.prototype.selectVideoElement = function () {
  * @param isFocused indicates if the thumbnail should be focused/pinned or not
  */
 SmallVideo.prototype.focus = function(isFocused) {
-    var focusedCssClass = "videoContainerFocused";
+    var focusedCssClass = "videocontainer_focused";
     var isFocusClassEnabled = $(this.container).hasClass(focusedCssClass);
 
     if (!isFocused && isFocusClassEnabled) {

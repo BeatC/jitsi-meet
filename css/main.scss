@@ -1,8 +1,9 @@
-/* Variables BEGIN */
+/* Variables and Mixins BEGIN */
 
 @import 'variables';
+@import 'mixins';
 
-/* Variables END */
+/* Variables and Mixins END */
 
 /* Fonts BEGIN */
 
@@ -33,5 +34,7 @@
 @import 'feedback';
 @import 'jquery.contextMenu';
 @import 'keyboard-shortcuts';
+@import 'filmstrip/filmstrip';
+@import 'videocontainer/videocontainer';
 
 /* Modules END */

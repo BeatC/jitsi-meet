@@ -147,7 +147,6 @@
             <div id="subject"></div>
         </div>
         <div id="videospace">
-
             <div id="largeVideoContainer" class="videocontainer">
                 <div id="presentation"></div>
                 <div id="sharedVideo"><div id="sharedVideoIFrame"></div></div>
@@ -172,39 +171,47 @@
                 </span>
             </div>
 
-            <div id="remoteVideos">
-                <span id="localVideoContainer" class="videocontainer">
-                    <span id="localVideoWrapper">
-                        <!--<video id="localVideo" autoplay muted></video> - is now per stream generated -->
+            <!-- Filmstrip BEGIN -->
+            <div class="filmstrip">
+                <div id="remoteVideos" class="filmstrip__videos">
+                    <div id="localVideoContainer" class="videocontainer videocontainer_small filmstrip__video">
+                        <span id="localVideoWrapper">
+                            <!--<video id="localVideo" autoplay muted></video> - is now per stream generated -->
+                        </span>
+                        <audio id="localAudio" autoplay muted></audio>
+                        <span class="focusindicator"></span>
+                        <div class="videocontainer__toolbar">
+
+                        </div>
+                    </div>
+                        <audio id="userJoined" src="sounds/joined.wav" preload="auto"></audio>
+                        <audio id="userLeft" src="sounds/left.wav" preload="auto"></audio>
+                    </div>
+                <span id="bottomToolbar" class="filmstrip__toolbar">
+                    <span class="bottomToolbar_span">
+                        <a class="bottomToolbarButton" id="bottom_toolbar_chat" data-container="body" data-toggle="popover" shortcut="toggleChatPopover" data-placement="top" data-i18n="[content]bottomtoolbar.chat" content="Open / close chat">
+                            <i id="chatBottomButton" class="icon-chat-simple">
+                                <span id="bottomUnreadMessages"></span>
+                            </i>
+                        </a>
                     </span>
-                    <audio id="localAudio" autoplay muted></audio>
-                    <span class="focusindicator"></span>
+                    <span class="bottomToolbar_span">
+                        <a class="bottomToolbarButton" id="bottom_toolbar_contact_list" data-container="body" data-toggle="popover" data-placement="top" id="contactlistpopover"  data-i18n="[content]bottomtoolbar.contactlist" content="Open / close contact list">
+                            <i id="contactListButton" class="icon-contactList">
+                                <span id="numberOfParticipants"></span>
+                            </i>
+                        </a>
+                    </span>
+                    <span class="bottomToolbar_span">
+                        <a class="bottomToolbarButton" id="bottom_toolbar_film_strip" data-container="body" data-toggle="popover" shortcut="filmstripPopover" data-placement="top" data-i18n="[content]bottomtoolbar.filmstrip" content="Show / hide film strip">
+                            <i id="filmStripButton" class="icon-filmstrip"></i>
+                        </a>
+                    </span>
                 </span>
-                <audio id="userJoined" src="sounds/joined.wav" preload="auto"></audio>
-                <audio id="userLeft" src="sounds/left.wav" preload="auto"></audio>
             </div>
-            <span id="bottomToolbar">
-                <span class="bottomToolbar_span">
-                    <a class="bottomToolbarButton" id="bottom_toolbar_chat" data-container="body" data-toggle="popover" shortcut="toggleChatPopover" data-placement="top" data-i18n="[content]bottomtoolbar.chat" content="Open / close chat">
-                        <i id="chatBottomButton" class="icon-chat-simple">
-                            <span id="bottomUnreadMessages"></span>
-                        </i>
-                    </a>
-                </span>
-                <span class="bottomToolbar_span">
-                    <a class="bottomToolbarButton" id="bottom_toolbar_contact_list" data-container="body" data-toggle="popover" data-placement="top" id="contactlistpopover"  data-i18n="[content]bottomtoolbar.contactlist" content="Open / close contact list">
-                        <i id="contactListButton" class="icon-contactList">
-                            <span id="numberOfParticipants"></span>
-                        </i>
-                    </a>
-                </span>
-                <span class="bottomToolbar_span">
-                    <a class="bottomToolbarButton" id="bottom_toolbar_film_strip" data-container="body" data-toggle="popover" shortcut="filmstripPopover" data-placement="top" data-i18n="[content]bottomtoolbar.filmstrip" content="Show / hide film strip">
-                        <i id="filmStripButton" class="icon-filmstrip"></i>
-                    </a>
-                </span>
-            </span>
         </div>
+        <!-- Filmstrip END -->
+
         <div id="chatspace" class="right-panel chat" style="display:none;">
             <div id="nickname" class="chat__nickname nickname">
                 <span data-i18n="chat.nickname.title"></span>
