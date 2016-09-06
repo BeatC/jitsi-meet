@@ -25,6 +25,10 @@
     object-fit: cover;
 }
 
+#largeVideo {
+    background: $videoBgColor;
+}
+
 #largeVideo,
 #largeVideoWrapper,
 #largeVideoContainer {
@@ -198,9 +202,10 @@
 }
 
 #dominantSpeaker {
+    @include flex();
     visibility: hidden;
-    width: 300px;
-    height: 300px;
+    width: 340px;
+    height: 340px;
     margin: auto;
     overflow: hidden;
     position: relative;
@@ -221,7 +226,6 @@
 #dominantSpeakerAvatar {
     width: 200px;
     height: 200px;
-    top: 50px;
     margin: auto;
     position: relative;
     border-radius: 100px;

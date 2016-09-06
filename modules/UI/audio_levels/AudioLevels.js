@@ -2,6 +2,8 @@
 /* jshint -W101 */
 
 import CanvasUtil from './CanvasUtils';
+import Circle from './Circle';
+import GradientFactory from './GradientFactory';
 import FilmStrip from '../videolayout/FilmStrip';
 
 const LOCAL_LEVEL = 'local';
@@ -10,19 +12,40 @@ let ASDrawContext = null;
 let audioLevelCanvasCache = {};
 let dominantSpeakerAudioElement = null;
 
-function initDominantSpeakerAudioLevels(dominantSpeakerAvatarSize) {
-    let ASRadius = dominantSpeakerAvatarSize / 2;
-    let ASCenter = (dominantSpeakerAvatarSize + ASRadius) / 2;
+function initDominantSpeakerAudioLevels(dominantSpeakerAvatarSize, canvasSize) {
+    let ASRadius = Math.floor(dominantSpeakerAvatarSize / 2);
+    let ASCenter = Math.floor(canvasSize / 2);
+    let center = {
+      x: ASCenter,
+      y: ASCenter
+    };
+    let outerColors = [
+        interfaceConfig.AUDIO_LEVEL_OUTER_CIRCLE_INNER_COLOR,
+        interfaceConfig.AUDIO_LEVEL_OUTER_CIRCLE_OUTER_COLOR
+    ];
+    let innerColors = [
+        interfaceConfig.AUDIO_LEVEL_INNER_CIRCLE_INNER_COLOR,
+        interfaceConfig.AUDIO_LEVEL_INNER_CIRCLE_OUTER_COLOR
+    ];
+    let gradientFactory = new GradientFactory(ASDrawContext, innerColors);
 
-    // Draw a circle.
-    ASDrawContext.beginPath();
-    ASDrawContext.arc(ASCenter, ASCenter, ASRadius, 0, 2 * Math.PI);
-    ASDrawContext.closePath();
+    let innerCircle = new Circle(ASDrawContext);
+    innerCircle.center = center;
+    innerCircle.radius = ASRadius + interfaceConfig.AUDIO_LEVEL_INNER_CIRCLE_THRESHOLD;
+    let gradientForInnerCircle = gradientFactory.createRadialGradient(center, ASRadius, innerCircle.radius);
+    innerCircle.color = gradientForInnerCircle;
 
-    // Add a shadow around the circle
-    ASDrawContext.shadowColor = interfaceConfig.SHADOW_COLOR;
-    ASDrawContext.shadowOffsetX = 0;
-    ASDrawContext.shadowOffsetY = 0;
+    let outerCircle = new Circle(ASDrawContext);
+    outerCircle.center = center;
+    outerCircle.radius = innerCircle.radius + interfaceConfig.AUDIO_LEVEL_OUTER_CIRCLE_THRESHOLD;
+    gradientFactory.colors = outerColors;
+    let gradientForOuterCircle = gradientFactory.createRadialGradient(center, innerCircle.radius, outerCircle.radius);
+    outerCircle.color = gradientForOuterCircle;
+
+    ASDrawContext.filter = 'blur(2px)';
+    outerCircle.draw();
+    ASDrawContext.filter = 'none';
+    innerCircle.draw();
 }
 
 /**
@@ -138,7 +161,8 @@ const AudioLevels = {
         dominantSpeakerAudioElement.height = dominantSpeakerHeight;
 
         let dominantSpeakerAvatar = $("#dominantSpeakerAvatar");
-        initDominantSpeakerAudioLevels(dominantSpeakerAvatar.width());
+        initDominantSpeakerAudioLevels(dominantSpeakerAvatar.width(), parentContainer.width());
+
     },
 
     /**
@@ -146,6 +170,8 @@ const AudioLevels = {
      * didn't exist we create it.
      */
     updateAudioLevelCanvas (id, thumbWidth, thumbHeight) {
+        console.log('updateAudioLevelCanvas');
+
         let videoSpanId = 'localVideoContainer';
         if (id) {
             videoSpanId = `participant_${id}`;
@@ -243,6 +269,7 @@ const AudioLevels = {
     },
 
     updateCanvasSize (thumbWidth, thumbHeight) {
+        console.log('updateCanvasSize');
         let canvasWidth = thumbWidth + interfaceConfig.CANVAS_EXTRA;
         let canvasHeight = thumbHeight + interfaceConfig.CANVAS_EXTRA;
 

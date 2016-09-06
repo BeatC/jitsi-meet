@@ -214,7 +214,7 @@ SmallVideo.prototype.hideIndicator = function () {
  */
 SmallVideo.prototype.showAudioIndicator = function(isMuted) {
     var audioMutedClassName = 'videocontainer__audio-muted';
-    var audioMutedSpan = $(`#${this.videoSpanId}>.${audioMutedClassName}`);
+    var audioMutedSpan = $(`#${this.videoSpanId}.${audioMutedClassName}`);
 
     if (!isMuted) {
         if (audioMutedSpan.length > 0) {
