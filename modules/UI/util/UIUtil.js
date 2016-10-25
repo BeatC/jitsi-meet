@@ -114,7 +114,6 @@ const TOOLTIP_POSITIONS = {
             title() {
                 return this.getAttribute('content');
             },
-
             html: true, // Handle multiline tooltips.
 
             // The following two prevent tooltips from being stuck:

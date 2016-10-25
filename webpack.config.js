@@ -34,6 +34,9 @@ var config = {
             loader: 'expose?$!expose?jQuery',
             test: /\/node_modules\/jquery\/.*\.js$/
         },{
+            loader: 'imports?$=jquery',
+            test: /\/node_modules\/tipsy\/src\/javascripts\/.*\/js/
+        },{
             // Disable AMD for the Strophe.js library or its imports will fail
             // at runtime.
 
