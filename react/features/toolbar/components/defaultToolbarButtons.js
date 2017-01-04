@@ -164,8 +164,7 @@ const defaultToolbarButtons = {
         html: `<ul id='sharedVideoMutedPopup'
                    class='loginmenu extendedToolbarPopup'>
                    <li data-i18n='[html]toolbar.sharedVideoMutedPopup'></li>
-               </ul>
-`
+               </ul>`
     },
     'sip': {
         id: 'toolbar_button_sip',

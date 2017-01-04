@@ -38,6 +38,7 @@ import FollowMe from "../FollowMe";
 
 var eventEmitter = new EventEmitter();
 UI.eventEmitter = eventEmitter;
+UI.Toolbar = Toolbar;
 
 let etherpadManager;
 let sharedVideoManager;

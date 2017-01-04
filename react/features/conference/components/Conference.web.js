@@ -7,7 +7,7 @@ import {
     disconnect
 } from '../../base/connection';
 import { obtainConfigAndInit } from '../actions';
-import { MainToolbar } from '../../toolbar';
+import { Toolbar } from '../../toolbar';
 
 /**
  * For legacy reasons, inline style for display none.
@@ -75,7 +75,7 @@ class Conference extends Component {
                             className = 'noticeText'
                             id = 'noticeText' />
                     </div>
-                    <MainToolbar />
+                    <Toolbar />
                 </div>
                 <div
                     className = 'hide'

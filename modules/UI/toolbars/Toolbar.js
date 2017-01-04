@@ -338,9 +338,9 @@ Toolbar = {
         // it's own configuration from interface_config.
         this._initToolbarButtons();
 
-        this._setShortcutsAndTooltips();
+        //this._setShortcutsAndTooltips();
 
-        this._setButtonHandlers();
+        //this._setButtonHandlers();
 
         APP.UI.addListener(UIEvents.SIDE_TOOLBAR_CONTAINER_TOGGLED,
             (containerId, isVisible) => {
@@ -432,7 +432,7 @@ Toolbar = {
      * streaming is active.
      */
     updateDesktopSharingButtonState () {
-        this._setToggledState(  "toolbar_button_desktopsharing",
+        this._setToggledState("toolbar_button_desktopsharing",
                                 APP.conference.isSharingScreen);
     },
 
@@ -681,10 +681,14 @@ Toolbar = {
      */
     _addToolbarButton(button, place, isSplitter) {
         const places = {
-            main: 'mainToolbar',
             extended: 'extendedToolbarButtons'
         };
         let id = places[place];
+
+        if (!id) {
+            return;
+        }
+
         let buttonElement = document.createElement("a");
         if (button.className) {
             buttonElement.className = button.className;
