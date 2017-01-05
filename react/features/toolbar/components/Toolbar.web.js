@@ -1,8 +1,6 @@
 /* global APP, interfaceConfig */
 import React, { Component } from 'react';
 
-import UIEvents from '../../../../service/UI/UIEvents';
-
 import ToolbarButton from './ToolbarButton';
 import defaultToolbarButtons from './defaultToolbarButtons';
 import { getToolbarButtonPlace, getButtonHandlers } from '../functions';
@@ -15,6 +13,18 @@ import { getToolbarButtonPlace, getButtonHandlers } from '../functions';
 export default class Toolbar extends Component {
 
     /**
+     * Constructor of the toolbar class.
+     *
+     * @param {Object} props - React props for the component.
+     */
+    constructor(props) {
+        super(props);
+
+        // Main toolbar buttons by default
+        this._place = 'main';
+    }
+
+    /**
      * Initializes toolbar buttons and UI handlers.
      *
      * @returns {void}
@@ -24,17 +34,25 @@ export default class Toolbar extends Component {
         // The main toolbar will only take into account
         // it's own configuration from interface_config.
         this._initToolbarButtons();
+        this._initUIHandlers();
+    }
 
-        APP.UI.addListener(UIEvents.FULLSCREEN_TOGGLED,
-            isFullScreen => {
-                APP.UI.Toolbar._handleFullScreenToggled(isFullScreen);
-            });
+    /**
+     * Initializes UI handlers for toolbar.
+     *
+     * @protected
+     * @abstract
+     * @returns {void}
+     */
+    _initUIHandlers() {
+        // Base class doesn't have implementation of this method
     }
 
     /**
      * Initialise toolbar buttons.
      *
      * @returns {void}
+     * @private
      */
     _initToolbarButtons() {
         const buttons = interfaceConfig.TOOLBAR_BUTTONS
@@ -42,7 +60,7 @@ export default class Toolbar extends Component {
             .reduce((acc, value) => {
                 const place = getToolbarButtonPlace(value);
 
-                if (place === 'main' && value in defaultToolbarButtons) {
+                if (place === this._place && value in defaultToolbarButtons) {
                     const button = defaultToolbarButtons[value];
 
                     button.name = value;
@@ -59,7 +77,7 @@ export default class Toolbar extends Component {
      * Returns array of buttons to be shown in the main toolbar.
      *
      * @returns {Array}
-     * @private
+     * @protected
      */
     _getButtons() {
         const { buttons } = this.state;
@@ -68,15 +86,12 @@ export default class Toolbar extends Component {
         return buttons.reduce((acc, button, index) => {
             const onClick = buttonHandlers[button.id];
 
-            if (interfaceConfig.MAIN_TOOLBAR_SPLITTER_INDEX !== undefined
-                && index
-                === interfaceConfig.MAIN_TOOLBAR_SPLITTER_INDEX) {
-                acc.push(this._getSplitter());
-            }
+            this._buttonWillPush(index, acc);
 
             acc.push(
                 <ToolbarButton
                     button = { button }
+                    key = { button.id }
                     onClick = { onClick } />
             );
 
@@ -85,29 +100,15 @@ export default class Toolbar extends Component {
     }
 
     /**
-     * Returns splitter for the main toolbar.
+     * Hook before the next button will be added to the toolbar.
      *
-     * @returns {ReactElement}
-     * @private
+     * @param {number} index - Current toolbar position.
+     * @param {Array} buttons - Array of buttons already added to the toolbar.
+     * @protected
+     * @abstract
+     * @returns {void}
      */
-    _getSplitter() {
-        return (
-            <span className = 'toolbar__splitter' />
-        );
-    }
-
-    /**
-     * Rendering method.
-     *
-     * @returns {ReactElement}
-     */
-    render() {
-        return (
-            <div
-                className = 'toolbar'
-                id = 'mainToolbar' >
-                { this._getButtons() }
-            </div>
-        );
+    _buttonWillPush() {
+        // Base class doesn't have implementation of this method.
     }
 }

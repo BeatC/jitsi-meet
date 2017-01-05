@@ -18,6 +18,9 @@ export default class ToolbarButton extends Component {
     constructor(props) {
         super(props);
 
+        // By default toolbar buttons don't have extra html.
+        this._extraHtml = null;
+
         // Bind methods to save context
         this._buttonRef = this._buttonRef.bind(this);
     }
@@ -44,16 +47,14 @@ export default class ToolbarButton extends Component {
         state.id = button.id;
 
         // If the button has custom inner html then
-        // use React's dangerouslySetInnerHTML property.
+        // storing it in instance field
         if (button.html) {
-            state.dangerouslySetInnerHTML = {
-                __html: button.html
-            };
+            this._extraHtml = button.html;
         }
 
         // TODO: remove it after UI.updateDTMFSupport fix
         if (button.hidden) {
-            state.style.display = 'none';
+            state.style = { display: 'none' };
         }
 
         if (button.shortcutAttr) {
@@ -150,6 +151,7 @@ export default class ToolbarButton extends Component {
                 { ...this.state }
                 onClick = { onClick }
                 ref = { this._buttonRef }>
+                { this._extraHtml }
                 { this._addPopups(button.popups) }
             </a>
         );

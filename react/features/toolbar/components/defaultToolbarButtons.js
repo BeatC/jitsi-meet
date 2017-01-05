@@ -1,5 +1,7 @@
 /* global JitsiMeetJS, APP */
 
+import React from 'react';
+
 /**
  * All toolbars buttons description
  */
@@ -82,25 +84,27 @@ const defaultToolbarButtons = {
         },
         shortcutDescription: 'keyboardShortcuts.toggleChat',
         sideContainerId: 'chat_container',
-        html: `<span class="badge-round">
-                   <span id="unreadMessages"></span>
-               </span>`
+        html: <span className = 'badge-round'>
+            <span id = 'unreadMessages' />
+        </span>
     },
     'contacts': {
         id: 'toolbar_contact_list',
         tooltipKey: 'bottomtoolbar.contactlist',
         className: 'button icon-contactList',
         sideContainerId: 'contacts_container',
-        html: `<span class="badge-round">
-                   <span id="numberOfParticipants"></span>
-               </span>`
+        html: <span className = 'badge-round'>
+            <span id = 'numberOfParticipants' />
+        </span>
     },
     'profile': {
         id: 'toolbar_button_profile',
         tooltipKey: 'profile.setDisplayNameLabel',
         className: 'button',
         sideContainerId: 'profile_container',
-        html: '<img id="avatar" src="images/avatar2.png" />'
+        html: <img
+            id = 'avatar'
+            src = 'images/avatar2.png' />
     },
     'etherpad': {
         id: 'toolbar_button_etherpad',
@@ -161,10 +165,11 @@ const defaultToolbarButtons = {
         id: 'toolbar_button_sharedvideo',
         tooltipKey: 'toolbar.sharedvideo',
         className: 'button icon-shared-video',
-        html: `<ul id='sharedVideoMutedPopup'
-                   class='loginmenu extendedToolbarPopup'>
-                   <li data-i18n='[html]toolbar.sharedVideoMutedPopup'></li>
-               </ul>`
+        html: <ul
+            className = 'loginmenu extendedToolbarPopup'
+            id = 'sharedVideoMutedPopup'>
+            <li data-i18n = '[html]toolbar.sharedVideoMutedPopup' />
+        </ul>
     },
     'sip': {
         id: 'toolbar_button_sip',
