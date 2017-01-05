@@ -33,7 +33,7 @@ export default class MainToolbar extends Toolbar {
     _initUIHandlers() {
         APP.UI.addListener(UIEvents.FULLSCREEN_TOGGLED,
             isFullScreen => {
-                APP.UI.Toolbar._handleFullScreenToggled(isFullScreen);
+                this._handleFullScreenToggled(isFullScreen);
             });
     }
 

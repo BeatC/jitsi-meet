@@ -33,7 +33,7 @@ export default class ExtendedToolbar extends Toolbar {
      * @override
      * @returns {void}
      */
-    initUIHandlers() {
+    _initUIHandlers() {
         APP.UI.addListener(UIEvents.SIDE_TOOLBAR_CONTAINER_TOGGLED,
             containerId => {
                 this._handleSideToolbarContainerToggled(containerId);
