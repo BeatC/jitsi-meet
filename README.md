@@ -1,5 +1,8 @@
 Jitsi Meet - Secure, Simple and Scalable Video Conferences
 ====
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2f5dba3010d04360ab089b79776f6a09)](https://www.codacy.com/app/BeatC/jitsi-meet?utm_source=github.com&utm_medium=referral&utm_content=BeatC/jitsi-meet&utm_campaign=badger)
+
 Jitsi Meet is an open-source (Apache) WebRTC JavaScript application that uses [Jitsi Videobridge](https://jitsi.org/videobridge) to provide high quality, scalable video conferences. You can see [Jitsi Meet in action](http://youtu.be/7vFUVClsNh0) here at the session #482 of the VoIP Users Conference.
 
 You can also try it out yourself at https://meet.jit.si .
